@@ -16,5 +16,8 @@ else:
 media = soma / contador
 desvio_padrao = 0
 
-for i in numeros:
-    
+for num in numeros:
+    desvio_padrao += (num - media) ** 2
+desvio_padrao = (desvio_padrao / (contador - 1)) ** 0.5
+
+print(desvio_padrao)
