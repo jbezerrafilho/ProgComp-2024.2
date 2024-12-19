@@ -1,3 +1,4 @@
+
 num = int((input('Digite um número para ver quantos primos existe entre 3 e ele: ')))
 contador = 0
 primo_anterior = 0
@@ -23,3 +24,4 @@ while i <= num:
 
 print(f'A soma de primos no intervalo até {num} \
 é {contador}.')
+
