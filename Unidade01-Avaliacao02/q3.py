@@ -1,4 +1,4 @@
-limite = 100000
+limite = 1000000
 contador = 0
 primo_anterior = 0
 primo_atual = 0
@@ -8,20 +8,22 @@ while dividendo <= limite:
 
     # Divisor
     div = 2
-    # Número de divisores
-    ndiv = 1  
-    while div <= dividendo:
+    eh_primo = True
+    while div <= (dividendo**(1/2)):
         if dividendo % div == 0:
-            ndiv += 1
+            eh_primo = False
+            break
         div += 1
 
     # Se for primo atualize as variáveis
-    if ndiv == 2:
+    if eh_primo:
         primo_anterior = primo_atual
         primo_atual = dividendo
+        # Se for um par de números primos ímpares e consecutivos, incremente o contador
         if (primo_atual - primo_anterior) == 2:
             contador += 1
-            print( f'({primo_anterior}, {primo_atual})')
+            # Caso queira visualizar os pares consecutivos, tire o comentário a seguir
+            #print( f'({primo_anterior}, {primo_atual})')
 
     dividendo += 1
 
