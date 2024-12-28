@@ -10,7 +10,7 @@ palavras = (
     "GESSO", "GRADE", "GRANA", "GRAMA", "GURIA", "GREVE", "GRUTA",
     "HEROI", "HOTEL", "ICONE", "IMPAR", "IMUNE", "INDIO", "JUNTA",
     "LAPIS", "LARVA", "LAZER", "LENTO", "LESTE", "LIMPO", "LIVRO",
-    "MACIO", "MAGRO", "MALHA", "MANSO", "MARCO", "METAL", "MORTE",
+    "MACIO", "MAGRO", "MALHA", "MANSO", "MARCO", "METAL", "MORAL",
     "MORRO", "MURAL", "MOVEL", "NACAO", "NINHO", "NOBRE", "NORMA",
     "NORTE", "NUVEM", "PACTO", "PALHA", "PARDO", "PARTE", "PEDRA",
     "PEDAL", "PEIXE", "PRADO", "PISTA", "POMBO", "POETA", "PONTO",
@@ -24,46 +24,41 @@ palavras = (
 
 sorteada = random.choice(palavras)
 tentativas = 6
-atual =  "_" * len(sorteada)
 RED = '\033[31;m'
-GREEN = '\033[32;m'
-YELLOW = '\033[33;m'
+GREEN = '\033[1;32;m'
+YELLOW = '\033[1;33;m'
 DEFAULT = '\033[m'
 
-print('JOGO DO TERMO')
-print('Atenção as regras:')
-print('** Descubra a palavra certa. Você tem 6 tentativas!!')
-print('** Uma letra na cor'+ GREEN + ' Verde '+ DEFAULT + 'significa que a mesma faz parte \
-da palavra e está na posição correta.')
-print('** Uma letra na cor'+ YELLOW + ' Amarela '+ DEFAULT + 'significa que a mesma faz parte \
-da palavra, mas está em outra posição.')
-print('** Uma letra na cor'+ RED + ' Vermelha '+ DEFAULT + 'significa que a mesma não faz parte \
-da palavra.')
-print('** Podem existir letras repetidas!!')
-print()
-print(atual)
+print(f"""
+JOGO DO TERMO
+Atenção às regras:
+** Descubra a palavra certa. Você tem 6 tentativas!!
+** Uma letra na cor {GREEN}Verde{DEFAULT} está na {GREEN}posição correta{DEFAULT} da palavra.
+** Uma letra na cor {YELLOW}Amarela{DEFAULT} está {YELLOW}posiçao incorreta{DEFAULT} da palavra.
+** Uma letra na cor {RED}Vermelho{DEFAULT} não faz parte da palavra.
+** Podem existir letras repetidas!!
+""")
 
-
-
+atual = ''
 while (atual != sorteada) and (tentativas > 0):
    
     palavra = input('Digite uma palavra: ').upper()
+
     while len(palavra) != 5:
         palavra = input('Digite uma palavra com 5 letras: ').upper() 
-    # String é imutável
-    nova = ''
+   
+    atual = atual + '\n'
     for pos in range(len(sorteada)):
         if palavra == sorteada:
-            nova = sorteada
+            atual = sorteada
             break
         elif palavra[pos] == sorteada[pos]:
-            nova = nova + GREEN + sorteada[pos] + DEFAULT         
+            atual = atual + GREEN + sorteada[pos] + DEFAULT         
         elif palavra[pos] in sorteada:
-            nova = nova + YELLOW + palavra[pos] + DEFAULT
+            atual = atual + YELLOW + palavra[pos] + DEFAULT
         else:
-            nova = nova + RED + palavra[pos] + DEFAULT
-        
-    atual = nova
+            atual = atual + RED + palavra[pos] + DEFAULT 
+  
     if atual == sorteada and tentativas == 6:
         print(GREEN + atual + DEFAULT)
         print("Genial!!")
@@ -88,6 +83,7 @@ while (atual != sorteada) and (tentativas > 0):
     tentativas -= 1
 
 if atual != sorteada:
-    print(f'A palavra sorteada foi {sorteada}!')
+    print('Uma pena!!')
+    print(f'A palavra sorteada foi {sorteada}!')    
 
 
