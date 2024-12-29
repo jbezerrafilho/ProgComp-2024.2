@@ -22,11 +22,10 @@ palavras = (
     "VALSA", "VENTO", "VERDE", "VISAO", "VINHO", "VIUVO", "ZEBRA"
 )
 
-#sorteada_1 = random.choice(palavras)
-sorteada_1 = 'SUSHI'
-#sorteada_2 = random.choice(palavras)
-sorteada_2 = 'TECLA'
-tentativas = 6
+sorteada_1 = random.choice(palavras)
+sorteada_2 = random.choice(palavras)
+
+tentativas = 7
 RED = '\033[1;31;m'
 GREEN = '\033[1;32;m'
 YELLOW = '\033[1;33;m'
@@ -34,13 +33,22 @@ DEFAULT = '\033[m'
 
 print(f"""
 JOGO DO TERMO - DUETO
-Atenção às regras:
-** Descubra a palavra certa. Você tem 6 tentativas!!
+** Descubra a palavra certa. Você tem {tentativas} tentativas!!
 ** Uma letra na cor {GREEN}Verde{DEFAULT} está na {GREEN}posição correta{DEFAULT} da palavra.
 ** Uma letra na cor {YELLOW}Amarela{DEFAULT} está {YELLOW}posiçao incorreta{DEFAULT} da palavra.
 ** Uma letra na cor {RED}Vermelho{DEFAULT} não faz parte da palavra.
-** Podem existir letras repetidas!!
+** Somente PALAVRAS do conjunto abaixo serão aceitas com ENTRADA!
 """)
+
+palavras_linha = 7
+contador = 0
+for palavra in palavras:
+    print(palavra, end='  ')
+    contador += 1
+    if contador == palavras_linha:
+        print()
+        contador = 0
+print()
 
 termo1 = ''
 termo2 = ''
@@ -50,14 +58,15 @@ while tentativas > 0 and (not acerto_termo1 or not acerto_termo2):
     
     palavra = input('Digite uma palavra: ').upper()
     # Tratando a entrada do usuário
-    while len(palavra) != 5:
-        palavra = input('Digite uma palavra com 5 letras: ').upper() 
+    while palavra not in palavras:
+        palavra = input('Digite uma palavra válida com 5 letras: ').upper() 
    
     termo1 = termo1 + '\n'
     pos = 0
     while pos < len(sorteada_1) and not acerto_termo1:
         if palavra == sorteada_1:
             termo1 = termo1 + GREEN + sorteada_1 + DEFAULT
+           
             acerto_termo1 = True
             break
         elif palavra[pos] == sorteada_1[pos]:
@@ -68,7 +77,7 @@ while tentativas > 0 and (not acerto_termo1 or not acerto_termo2):
             termo1 = termo1 + RED + palavra[pos] + DEFAULT 
         pos += 1
         
-    print(termo1)
+    print(termo1) 
     
 
     termo2 = termo2 + '\n'
@@ -79,20 +88,20 @@ while tentativas > 0 and (not acerto_termo1 or not acerto_termo2):
             acerto_termo2 = True
             break
         elif palavra[pos1] == sorteada_2[pos1]:
-            termo2 = termo2 + GREEN + sorteada_1[pos1] + DEFAULT         
+            termo2 = termo2 + GREEN + sorteada_2[pos1] + DEFAULT          
         elif palavra[pos1] in sorteada_2:
-            termo2 = termo2 + YELLOW + palavra[pos1] + DEFAULT
+            termo2 = termo2 + YELLOW + palavra[pos1] + DEFAULT    
         else:
             termo2 = termo2 + RED + palavra[pos1] + DEFAULT 
         pos1 += 1
-
-    print(termo2)
-
+    print(termo2) 
 
     tentativas -= 1
 
-
-
+if not acerto_termo1:
+    print(f'O primeiro termo é {sorteada_1}')
+if not acerto_termo2:
+    print(f'O segundo termo é {sorteada_2}')
 
 
 
