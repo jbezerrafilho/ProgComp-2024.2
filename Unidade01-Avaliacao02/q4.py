@@ -38,7 +38,7 @@ JOGO DO TERMO - DUETO
 ** Uma letra na cor {GREEN}Verde{DEFAULT} está na {GREEN}posição correta{DEFAULT} da palavra.
 ** Uma letra na cor {YELLOW}Amarela{DEFAULT} está {YELLOW}posiçao incorreta{DEFAULT} da palavra.
 ** Uma letra na cor {RED}Vermelho{DEFAULT} não faz parte da palavra.
-** Somente PALAVRAS do conjunto abaixo serão aceitas com ENTRADA!
+** Selecione PALAVRAS do conjunto ABAIXO!
 """
 
 print(msg)
@@ -46,74 +46,89 @@ print(msg)
 # O próximo trecho de código até o 'print' na linha 55 formata a impressão da tupla 'palavras'
 palavras_linha = 7
 contador = 0
-for palavra in palavras:
-    print(palavra, end='  ')
+for palpite in palavras:
+    print(palpite, end='  ')
     contador += 1
     if contador == palavras_linha:
         print()
         contador = 0
 print()
 
-# Cada palavra digitada será acumulada em ambas variáveis
-termo1 = ''
-termo2 = ''
+# Variável criada para acumular os palpites digitados
+termos = '1ºTermo  2ºTermo \n'
 
-# Variáveis de controle dos laços internos 
-acerto_termo1 = False
-acerto_termo2 = False
+# Variáveis para validar o acerto do usuário
+acertou_termo1 = False
+acertou_termo2 = False
 
-while tentativas > 0 and (not acerto_termo1 or not acerto_termo2):
+# Variável criada para formatar a saída do texto
+alinhar = 9 * ' '
     
-    palavra = input('Digite uma palavra: ').upper()
+
+# Laço principal. Será controlado em função das tentativas e acertos
+while tentativas > 0 and (not acertou_termo1 or not acertou_termo2):
+    
+    palpite = input('Digite uma palavra: ').strip().upper()
 
     # Tratando a entrada do usuário
-    while palavra not in palavras:
-        palavra = input('Digite uma palavra válida com 5 letras: ').upper() 
-   
+    while palpite not in palavras:
+        palpite = input('Digite uma palavras do conjunto acima ⬆️: ').strip().upper() 
 
-    pos = 0 # 1ª variável de controle do laço
-    termo1 += '\n' 
-    # Iteramos sobre cada letra da palavra digitada
-    while pos < len(sorteada_1) and not acerto_termo1:
-        if palavra == sorteada_1:
-            termo1 += GREEN + sorteada_1 + DEFAULT
-            acerto_termo1 = True # 2ª Variável de controle alterada
-            break
-        elif palavra[pos] == sorteada_1[pos]:
-            termo1 += GREEN + sorteada_1[pos] + DEFAULT         
-        elif palavra[pos] in sorteada_1:
-            termo1 += YELLOW + palavra[pos] + DEFAULT
-        else:
-            termo1 += RED + palavra[pos] + DEFAULT 
-        pos += 1
-    print(termo1) 
-    
-    
-    pos = 0 # 1ª variável de controle do laço
-    termo2 += '\n'
+    # Armazenam o 'palpite' atual do laço e adiciona as cores 
+    atual_1 = '' 
+    atual_2 = '' 
 
-    # Iteramos sobre cada letra da palavra digitada
-    while pos < len(sorteada_2) and not acerto_termo2:
-        if palavra == sorteada_2:
-            termo2 += GREEN + sorteada_2 + DEFAULT
-            acerto_termo2 = True # 2ª Variável de controle
+    # Lógica para comparar o palpite com o termo 1 (sorteada_1)
+    # Iteramos sobre cada letra da palavra digitada e definimos a cor
+    pos = 0 
+    while pos < len(sorteada_1) and not acertou_termo1:
+        if palpite == sorteada_1:
+            atual_1 += GREEN + sorteada_1 + DEFAULT
+            acertou_termo1 = True 
             break
-        elif palavra[pos] == sorteada_2[pos]:
-            termo2 += GREEN + sorteada_2[pos] + DEFAULT          
-        elif palavra[pos] in sorteada_2:
-            termo2 += YELLOW + palavra[pos] + DEFAULT    
+        elif palpite[pos] == sorteada_1[pos]:
+            atual_1 += GREEN + sorteada_1[pos] + DEFAULT         
+        elif palpite[pos] in sorteada_1:
+            atual_1 += YELLOW + palpite[pos] + DEFAULT
         else:
-            termo2 += RED + palavra[pos] + DEFAULT 
+            atual_1 += RED + palpite[pos] + DEFAULT 
         pos += 1
-    print(termo2) 
    
+    # Agora, comparamos o palpite com o termo 2 (sorteada_2)
+    pos = 0 
+    while pos < len(sorteada_2) and not acertou_termo2:
+        if palpite == sorteada_2:
+            atual_2 += GREEN + sorteada_2 + DEFAULT
+            acertou_termo2 = True # Controle do laço
+            break
+        elif palpite[pos] == sorteada_2[pos]:
+            atual_2 += GREEN + sorteada_2[pos] + DEFAULT          
+        elif palpite[pos] in sorteada_2:
+            atual_2 += YELLOW + palpite[pos] + DEFAULT    
+        else:
+            atual_2 += RED + palpite[pos] + DEFAULT 
+        pos += 1
+    
+    # Exibindo os 'palpites com as cores' acumulados durante as tentativas
+    if atual_1 == '':
+        termos += alinhar + atual_2 + '\n' 
+        print(termos)
+    elif atual_2 == '':
+        termos += atual_1 + alinhar + '\n'
+        print(termos)
+    else:
+        termos += atual_1 + '    ' + atual_2 + '\n'
+        print(termos)
+    
     tentativas -= 1
 
-# Se o jogador errar suas tentativas, informe as palavras sorteadas
-if not acerto_termo1:
-    print(f'O primeiro termo é {sorteada_1}')
-if not acerto_termo2:
-    print(f'O segundo termo é {sorteada_2}')
+# Finalizando o jogo após as tentativas!
+if acertou_termo1 and acertou_termo2:
+    print('Genial!!')
+if not acertou_termo1:
+    print(f'O primeiro termo é {sorteada_1}!')
+if not acertou_termo2:
+    print(f'O segundo termo é {sorteada_2}!')
 
 
 
