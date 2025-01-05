@@ -1,3 +1,6 @@
+# Developed by J.Bezerra 
+# Janeiro de 2025
+
 import datetime
 
 # Data atual
@@ -14,23 +17,27 @@ ano_0 = 1968
 qtd_dias = 0
 
 # Calculando os dias completos dos anos intermediários
+# >1969---------------Dias calculados------------------2024<
 for ano in range(ano_0 + 1, 2025):
    if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
         qtd_dias += 366
    else:
         qtd_dias += 365
-   
+
+
 
 # Calculando os dias do ano zero
+# >27/04/1968----------Dias calculados-----------31/12/1968<
 qtd_dias += 30 - dia_0
 for mes in range(mes_0, 13):
     if mes in [5, 7, 8, 10, 12]:
         qtd_dias += 31 
     elif mes in [6, 9, 11]:
         qtd_dias += 30 
-
+#
 
 # Calculando os dias do ano atual   
+# >01/01/2025----------Dias calculados-----------data_atual<
 for mes in range(1, mes_atual + 1):
     if mes == mes_atual:
         qtd_dias += dia_atual
@@ -39,9 +46,9 @@ for mes in range(1, mes_atual + 1):
     elif mes in [4, 6, 9, 11]:
         qtd_dias += 30   
 
-# Inicializando o dia da semana (27 de abril de 1968 é um sábado)
+# Calculando a quantidade de sábados
 qtd_sabados = 0
-dia_da_semana = 5  # 0 = segunda, 1 = terça, ..., 5 = sábado, 6 = domingo
+dia_da_semana = 0  # 0 = segunda, 1 = terça, ..., 5 = sábado, 6 = domingo
 for ano in range(ano_0, ano_atual + 1):
     for mes in range(1, 13):
         if mes in [1, 3, 5, 7, 8, 10, 12]:
@@ -66,4 +73,4 @@ for ano in range(ano_0, ano_atual + 1):
 
 
 print(f"Quantidade de dias entre {dia_0}/{mes_0}/{ano_0} e {dia_atual}/{mes_atual}/{ano_atual}: {qtd_dias} dias")
-print(f'A quantidade de sábados entre {dia_0}/{mes_0}/{ano_0} e {dia_atual}/{mes_atual}/{ano_atual} é: {qtd_sabados}')
+print(f'A quantidade de sábados no intervalo acima é: {qtd_sabados}')
