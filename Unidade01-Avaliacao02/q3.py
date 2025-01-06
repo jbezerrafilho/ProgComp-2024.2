@@ -1,5 +1,5 @@
 # Developed by J.Bezerra 
-# Dezembro de 2025
+# Dezembro de 2024
 
 # Atenção: O código finalizaou em aproximadamente 12s.
 limite = 1000000
