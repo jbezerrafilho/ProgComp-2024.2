@@ -1,3 +1,6 @@
+# Developed by J.Bezerra 
+# Janeiro de 2025
+
 import random
 palavras = (
     "ADAGA", "ADUBO", "AMIGO", "ANEXO", "ARAME", "ARARA", "ARROZ",
