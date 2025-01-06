@@ -1,5 +1,5 @@
 # Developed by J.Bezerra 
-# Janeiro de 2025
+# Dezembro de 2024
 
 num_inicial = 10
 num_final = 987631
