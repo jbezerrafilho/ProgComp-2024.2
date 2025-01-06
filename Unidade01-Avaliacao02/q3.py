@@ -1,3 +1,7 @@
+# Developed by J.Bezerra 
+# Janeiro de 2025
+
+# Atenção: O código finalizaou em aproximadamente 12s.
 limite = 1000000
 contador = 0
 primo_anterior = 0
