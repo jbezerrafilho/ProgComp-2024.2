@@ -1,3 +1,6 @@
+# Developed by J.Bezerra 
+# Dezembro de 2024
+
 num_inicial = 10
 num_final = 100000
 contador = 0
