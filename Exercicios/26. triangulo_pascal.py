@@ -2,15 +2,15 @@ lista = [1]
 print(lista)
 
 n = 1
-while n < 25:
-    lista1 = [1]
-    for posicao in range(len(lista) - 1):
-        lista1.append((lista[posicao] + lista[posicao + 1]))
+while n < 6:
+    temp = [1]
+    for pos in range(len(lista) - 1):
+        temp.append((lista[pos] + lista[pos + 1]))
     
-    lista1.append(1)
-    print(lista1)
-    lista = lista1
+    temp.append(1)
+    print(temp)
+    lista = temp
     n += 1
 
 
-elemento = 1307504
+#elemento = 1307504
