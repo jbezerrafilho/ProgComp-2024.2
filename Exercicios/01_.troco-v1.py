@@ -15,6 +15,7 @@ denominacoes = [200, 100, 50, 20, 10, 5, 2, 1]
 for valor in denominacoes:
     cedula = troco // valor
     troco = troco % valor
-    print(f'Cédula R$ {valor}: {cedula}')
+    if cedula != 0:
+        print(f'Cédula R$ {valor}: {cedula}')
 
 
