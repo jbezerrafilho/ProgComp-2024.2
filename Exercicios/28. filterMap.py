@@ -43063,3 +43063,5 @@ dados = '''
 '''
 
 print (len(dados.split('\n')))
+linhas = dados.split('\n')
+print (list(filter(lambda x: "BEZERRA" in x, linhas)))
