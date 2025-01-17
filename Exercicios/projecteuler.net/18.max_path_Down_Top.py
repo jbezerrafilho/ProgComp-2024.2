@@ -26,7 +26,5 @@ for i in range(len(triangle) - 2, -1, -1):
         # Atualiza o elemento atual com o maior caminho a partir dele
         triangle[i][j] += max(triangle[i + 1][j], triangle[i + 1][j + 1])
 
- 
-
 # O topo contém o maior caminho
-print("Maior soma:", triangle[0][0])  # Saída: 23
+print("Maior soma:", triangle[0][0]) 
