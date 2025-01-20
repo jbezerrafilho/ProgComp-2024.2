@@ -1,4 +1,4 @@
-# Triângulo dado
+# Triângulo com 15 linhas - 0 a 14
 triangle = [
  [75],
  [95, 64],
