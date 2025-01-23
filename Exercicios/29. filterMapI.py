@@ -23,3 +23,7 @@ for candidato in candidatos:
 
 for candidato in dados_tratados:
     print(candidato)
+
+aprovados = filter(lambda x: x[2] >= 2 and x[3] >= 2 and x[4] >= 2 and x[5] >= 2 and x[6] >= 10, dados_tratados)
+for aprovado in aprovados:
+    print(aprovado[1], aprovado[6])
