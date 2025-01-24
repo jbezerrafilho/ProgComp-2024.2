@@ -21,7 +21,7 @@ triangle_copy = []
 for row in triangle:
     triangle_copy.append(row[0: len(row)])
 
-# Cálculo da soma máxima de baixo para cima
+# Cálculo da soma máxima de baixo para cima e atualizamos o triângulo de cópia
 for i in range(len(triangle) - 2, -1, -1):  # Começa na penúltima linha
     for j in range(len(triangle[i])):
         # Adicionar o máximo dos dois possíveis caminhos abaixo
@@ -29,8 +29,10 @@ for i in range(len(triangle) - 2, -1, -1):  # Começa na penúltima linha
 
 # Reconstruir o caminho para soma máxima
 path_to_max_sum = []
+
+# O 'i' percorre as linhas do triângulo e o 'j' percorre as colunas(elementos dentro da linha)
+# Só que do topo para baixo
 j = 0  
-# O 'i'percorre as linhas do triângulo e o 'j' percorre as colunas(elementos dentro da linha)
 for i in range(len(triangle) - 1):
     path_to_max_sum.append(triangle[i][j])
     if triangle_copy[i + 1][j] < triangle_copy[i + 1][j + 1]:
