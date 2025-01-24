@@ -1,4 +1,4 @@
-triangle = [
+triangulo = [
     [75],
     [95, 64],
     [17, 47, 82],
@@ -17,15 +17,15 @@ triangle = [
 ]
 
 # Copiar o triângulo original para manter a matriz de somas
-triangle_copy = []
-for row in triangle:
-    triangle_copy.append(row[0: len(row)])
+triangulo_aux = []
+for row in triangulo:
+    triangulo_aux.append(row[0: len(row)])
 
-# Cálculo da soma máxima de baixo para cima e atualizamos o triângulo de cópia
-for i in range(len(triangle) - 2, -1, -1):  # Começa na penúltima linha
-    for j in range(len(triangle[i])):
+# Cálculo da soma máxima de baixo para cima e atualizamos o triângulo auxiliar
+for i in range(len(triangulo) - 2, -1, -1):  # Começa na penúltima linha
+    for j in range(len(triangulo[i])):
         # Adicionar o máximo dos dois possíveis caminhos abaixo
-        triangle_copy[i][j] += max(triangle_copy[i + 1][j], triangle_copy[i + 1][j + 1])
+        triangulo_aux[i][j] += max(triangulo_aux[i + 1][j], triangulo_aux[i + 1][j + 1])
 
 # Reconstruir o caminho para soma máxima
 path_to_max_sum = []
@@ -33,12 +33,12 @@ path_to_max_sum = []
 # O 'i' percorre as linhas do triângulo e o 'j' percorre as colunas(elementos dentro da linha)
 # Só que do topo para baixo
 j = 0  
-for i in range(len(triangle) - 1):
-    path_to_max_sum.append(triangle[i][j])
-    if triangle_copy[i + 1][j] < triangle_copy[i + 1][j + 1]:
+for i in range(len(triangulo) - 1):
+    path_to_max_sum.append(triangulo[i][j])
+    if triangulo_aux[i + 1][j] < triangulo_aux[i + 1][j + 1]:
         j += 1
 # Adiciona o último elemento do caminho      
-path_to_max_sum.append(triangle[len(triangle) - 1][j])
+path_to_max_sum.append(triangulo[len(triangulo) - 1][j])
 
-print("Maior soma:", triangle_copy[0][0])
+print("Maior soma:", triangulo_aux[0][0])
 print("Caminho para soma máxima:", path_to_max_sum)
