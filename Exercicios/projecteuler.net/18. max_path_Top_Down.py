@@ -1,4 +1,4 @@
-caminhos = [
+triangle = [
  [75],
  [95, 64],
  [17, 47, 82],
@@ -20,16 +20,20 @@ caminhos = [
 path_to_max_sum = [75]
 
 
-for j in range(1, len(caminhos)):
-    caminhos[j][0] += caminhos[j-1][0] # Primeiro elemento
-    # Percorre os elementos do meio
-    for c in range(1, len(caminhos[j])-1): # Elementos do meio
-        caminhos[j][c] += max(caminhos[j-1][c-1], caminhos[j-1][c])
-    caminhos[j][j] += caminhos[j-1][j-1] # Ultimo elemento
-    path_to_max_sum.append(max(caminhos[j]) -  max(caminhos[j-1]))   
+for j in range(1, len(triangle)):
+    # Primeiro elemento da linha do triângulo
+    triangle[j][0] += triangle[j-1][0] 
+
+    # Percorre os elementos da coluna do meio
+    for c in range(1, len(triangle[j])-1):  
+        triangle[j][c] += max(triangle[j-1][c-1], triangle[j-1][c])
+
+    triangle[j][j] += triangle[j-1][j-1] # Ultimo elemento
+    
+    path_to_max_sum.append(max(triangle[j]) -  max(triangle[j-1]))   
 
 # caminhos[-1] é a ultima linha da matriz ou último elemento de uma lista
 # Equivalente a caminhos[len(caminhos)-1]
-print(max(caminhos[-1])) 
+print(max(triangle[-1])) 
 print(path_to_max_sum)
 
