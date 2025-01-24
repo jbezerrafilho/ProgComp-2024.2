@@ -16,14 +16,14 @@ triangulo = [
     [4, 62, 98, 27, 23, 0, 70, 98, 73, 93, 38, 53, 60, 0, 23]
 ]
 
-# Copiar o triângulo original para manter a matriz de somas
+# Copiar o triângulo original para um auxiliar 
 triangulo_aux = []
 for row in triangulo:
     triangulo_aux.append(row[0: len(row)])
 
-# Cálculo da soma máxima de baixo para cima e atualizamos o triângulo auxiliar
-for i in range(len(triangulo) - 2, -1, -1):  # Começa na penúltima linha
-    for j in range(len(triangulo[i])):
+# Cálculo da soma máxima de baixo para cima no triângulo auxiliar
+for i in range(len(triangulo_aux) - 2, -1, -1):  # Começa na penúltima linha
+    for j in range(len(triangulo_aux[i])):
         # Adicionar o máximo dos dois possíveis caminhos abaixo
         triangulo_aux[i][j] += max(triangulo_aux[i + 1][j], triangulo_aux[i + 1][j + 1])
 
