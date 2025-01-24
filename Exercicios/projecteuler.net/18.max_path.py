@@ -37,8 +37,8 @@ for i in range(len(triangle) - 1):
     path_to_max_sum.append(triangle[i][j])
     if triangle_copy[i + 1][j] < triangle_copy[i + 1][j + 1]:
         j += 1
+# Adiciona o último elemento do caminho      
 path_to_max_sum.append(triangle[len(triangle) - 1][j])
 
-# Resultado
 print("Maior soma:", triangle_copy[0][0])
 print("Caminho para soma máxima:", path_to_max_sum)
