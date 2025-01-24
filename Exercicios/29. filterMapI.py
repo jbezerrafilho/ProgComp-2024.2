@@ -43075,13 +43075,23 @@ for candidato in candidatos:
     dados_tratados.append(candidato)
     
 
-#for candidato in dados_tratados:
-    #print(candidato)
+aprovados = filter(lambda x: x[2] >= 2 and x[3] >= 2 and x[4] >= 2 
+                   and x[5] >= 2 and x[6] >= 10, dados_tratados)
 
-aprovados = filter(lambda x: x[2] >= 2 and x[3] >= 2 and x[4] >= 2 and x[5] >= 2 and x[6] >= 10, dados_tratados)
-#for aprovado in aprovados:
-    #print(aprovado[1], aprovado[6])
+#Q1
+primeiros_colocados = sorted(dados_tratados, key=lambda x: x[6], reverse=True)
+for candidato in primeiros_colocados[0:10]:
+    print(candidato[1], candidato[6])
 
-primeiros = sorted(dados_tratados, key=lambda x: x[6], reverse=True)
-for candidato in primeiros[:10]:
+#Q2
+soma, contador, media = 0, 0, 0 
+for candidato in primeiros_colocados[0:20]:
+    soma += candidato[6]
+    contador += 1
+media = soma / contador
+print(round(media, 2))
+
+#Q3
+primeiros_colocados = sorted(dados_tratados, key=lambda x: (x[6], x[1]), reverse=True)
+for candidato in primeiros_colocados[0:10]:
     print(candidato[1], candidato[6])
