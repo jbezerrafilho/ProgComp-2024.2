@@ -19,9 +19,9 @@ bigchars = [
 
 
 nome = input("Digite seu nome: ")
+print()
 
 for letra in nome:
-
     menor_inicio = 1000
     maior_fim = -1
     for linha in bigchars:
@@ -34,4 +34,6 @@ for letra in nome:
 
 for linha in bigchars:
     print(linha[menor_inicio:maior_fim+1])
+
+print()
    
