@@ -18,22 +18,26 @@ bigchars = [
 ]
 
 
-nome = input("Digite seu nome: ")
-print()
-
-for letra in nome:
-    menor_inicio = 1000
+nome = input("Digite seu nome: ").upper()
+alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+index_letras = []
+for letra in alfabeto:
+    menor_inicio = 10000
     maior_fim = -1
+    aux = []
     for linha in bigchars:
         inicio = linha.find(letra)
         fim = linha.rfind(letra)
-        if inicio < menor_inicio:
-            menor_inicio = inicio
-        if fim > maior_fim:
-            maior_fim = fim
-
-for linha in bigchars:
-    print(linha[menor_inicio:maior_fim+1])
-
-print()
+        menor_inicio = min(menor_inicio, inicio)
+        maior_fim = max(maior_fim, fim)
+    aux.append(menor_inicio) 
+    aux.append(maior_fim)
+    index_letras.append(aux)
    
+
+for letra in nome:
+    index = alfabeto.find(letra)   
+    for linha in bigchars:
+        print(linha[index_letras[index][0]:index_letras[index][1]+1])
+    
+
