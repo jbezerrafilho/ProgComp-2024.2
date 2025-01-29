@@ -1,3 +1,4 @@
+
 texto = '''Procurar a nossa felicidade através da felicidade dos outros - aconselhava Olívia noutra carta sem data.
 - Não estou pregando o ascetismo, a santidade, não estou elogiando o puro espírito de sacrifício e renúncia.
 Tudo isso seria inumano, significaria ainda uma fuga da vida. Mas o que procuro, o que desejo, é segurar a vida
@@ -17,16 +18,13 @@ pessoas aflitas que, para se salvarem, esperavam apenas a mão que as apoiasse, 
 dera-me duas mãos. Pensei tudo isso numa noite de insônia. Quando o dia nasceu, senti que tinha nascido de
 novo com ele. Era uma mulher nova.'''
 
-texto = texto.lower()
-palavras = texto.split()
+frequencia = dict()
+for palavra in texto.split():
+    frequencia[palavra] = frequencia.get(palavra, 0) + 1
+frequencia_ordenada = dict(sorted(frequencia.items(), key=lambda item: item[1], reverse=True))
 
+print("Frequência das palavras:")
+for palavra, contagem in frequencia_ordenada.items():
+    print(f"{palavra}: {contagem}")
 
-contagem_palavras = {}
-for palavra in palavras:
-    if palavra in contagem_palavras:
-        contagem_palavras[palavra] += 1
-    else:
-        contagem_palavras[palavra] = 1
-lista = contagem_palavras.items()
-
-print(lista)
+# print(frequencia)
