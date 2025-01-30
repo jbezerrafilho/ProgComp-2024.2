@@ -15,7 +15,7 @@ de certa maneira não haveria paz para mim. Descobri que a paz interior só se c
 exterior. Era preciso fazer alguma coisa pelos outros. O Mundo está cheio de sofrimento, de gritos de socorro.
 Que tinha eu feito até então para diminuir esse sofrimento, para atender a esses apelos? Eu via em meu redor
 pessoas aflitas que, para se salvarem, esperavam apenas a mão que as apoiasse, nada mais que isso. E Deus
-dera-me duas mãos. Pensei tudo isso numa noite de insônia. Quando o dia nasceu, senti que tinha nascido de
+dera-me duas mãos. Pensei tudo isso numa noite de insônia. Quando o dia nasceu, senti que tinha nascido denote
 novo com ele. Era uma mulher nova.'''
 
 frequencia = dict()
