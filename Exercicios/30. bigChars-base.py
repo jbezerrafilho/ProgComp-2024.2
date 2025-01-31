@@ -19,48 +19,28 @@ bigchars = [
 
 
 nome = input("Digite seu nome: ").upper()
-print()
 alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
-'''' Esta lista armazena outras 36 listas - uma para cada caractere 
-do alfabeto contendo o 'menor_inicio' e 'maior_fim comforme a lista
-bigchars. 
-'''
-index_letras = [] 
+# Limites para cada letra dentro do bigchars
+limites = {}
 
 for letra in alfabeto:
     menor_inicio = 10000
     maior_fim = -1
-    aux = []
     for linha in bigchars:
         inicio = linha.find(letra)
         fim = linha.rfind(letra)
         menor_inicio = min(menor_inicio, inicio)
         maior_fim = max(maior_fim, fim)
-    aux.append(menor_inicio) 
-    aux.append(maior_fim)
-    index_letras.append(aux)
-   
-''''
-Estes For's aninhados produzem um caractere em cima do outro
-'''
-# for letra in nome:
-#     index = alfabeto.find(letra)   
-#     for linha in bigchars:
-#         print(linha[index_letras[index][0]:index_letras[index][1]+1])
-        
+    limites[letra] = [menor_inicio, maior_fim]
 
-# Iterando sobre o índice da cada linha do bigchars
+# Percorrendo cada linha do bigchars   
 for i in range(len(bigchars)):
     linha_atual = ""   
-    for letra in nome:
-        index = alfabeto.find(letra)
-        inicio = index_letras[index][0]
-        fim = index_letras[index][1]
+    for letra in nome: 
+        inicio = limites[letra][0]
+        fim = limites[letra][1]
         linha_atual += bigchars[i][inicio:fim+1] + "  "
-    
-    # Imprimir a linha completa
     print(linha_atual)
- 
-print()
+
 
