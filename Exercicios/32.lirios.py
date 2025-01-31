@@ -21,10 +21,7 @@ novo com ele. Era uma mulher nova.'''
 frequencia = dict()
 for palavra in texto.split():
     frequencia[palavra] = frequencia.get(palavra, 0) + 1
-frequencia_ordenada = dict(sorted(frequencia.items(), key=lambda item: item[1], reverse=True))
+# Quando ordenamos o dicionario 'Frequencia' e atribuimos a f_ordenadas geramos uma lista de tuplas    
+f_ordenada = sorted(frequencia.items(), key=lambda item: item[1], reverse=True)
 
-print("Frequência das palavras:")
-for palavra, contagem in frequencia_ordenada.items():
-    print(f"{palavra}: {contagem}")
-
-# print(frequencia)
+print(f_ordenada[:10])
