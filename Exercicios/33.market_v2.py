@@ -7,11 +7,12 @@ df = yf.download( ticker,  period='5mo')
 
 # Dicionário dados
 dados = df['Close'].to_dict()
+pprint(dados)
+
 datas = list(dados['PETR4.SA'].keys())
 precos = list(dados['PETR4.SA'].values())
-#pprint(datas)
 
-pprint(datas)
+
 
 #Criar o gráfico
 plt.plot(datas, precos, color="purple")
