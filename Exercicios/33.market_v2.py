@@ -9,8 +9,8 @@ df = yf.download( ticker,  period='5mo')
 dados = df['Close'].to_dict()
 pprint(dados)
 
-datas = list(dados['PETR4.SA'].keys())
-precos = list(dados['PETR4.SA'].values())
+datas = list(dados[ticker].keys())
+precos = list(dados[ticker].values())
 
 
 

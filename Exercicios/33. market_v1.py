@@ -1,4 +1,4 @@
-import yfinance as yf
+import yfinance as yf 
 import matplotlib.pyplot as plt
 
 ticker = 'PETR4.SA'
