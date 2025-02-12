@@ -1,13 +1,18 @@
-from pprint import pprint  
 horas = {}
 minutos = {}
 
-with open('log.txt', 'r') as file:
-    for line in file:
-        #print(line)
-        w = line.split()
-        data = w[3][1:].split(':')
-        horas[data[1]] = horas.get(data[1], 1) + 1
-        minutos[data[2]] = minutos.get(data[2], 1) + 1
+fd = open('log.txt', 'r')
 
-pprint(minutos)
+for linha in fd:
+    posI = linha.find('[')
+    posF = linha.find(']')
+    print(linha[posI + 1:posF])
+fd.close()
+
+# linha = fd.readline()
+# while linha != "":
+#     posI = linha.find('[')
+#     posF = linha.find(']')
+#     print(linha[posI + 1:posF])
+#     linha = fd.readline()
+# fd.close()
