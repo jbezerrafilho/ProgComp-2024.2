@@ -1,21 +1,20 @@
 import pygame
-from pieces import load_pieces, initial_board  # Importando do arquivo pieces.py
 
 # Carregar imagens das peças
-def load_pieces():
+def load_pieces(square_size):
     pieces = {
-        'wp': pygame.image.load('assets/w_pawn.png'),    # Peão branco
-        'wr': pygame.image.load('assets/w_rook.png'),    # Torre branca
-        'wn': pygame.image.load('assets/w_knight.png'),  # Cavalo branco
-        'wb': pygame.image.load('assets/w_bishop.png'),  # Bispo branco
-        'wq': pygame.image.load('assets/w_queen.png'),   # Rainha branca
-        'wk': pygame.image.load('assets/w_king.png'),    # Rei branco
-        'bp': pygame.image.load('assets/b_pawn.png'),    # Peão preto
-        'br': pygame.image.load('assets/b_rook.png'),    # Torre preta
-        'bn': pygame.image.load('assets/b_knight.png'),  # Cavalo preto
-        'bb': pygame.image.load('assets/b_bishop.png'),  # Bispo preto
-        'bq': pygame.image.load('assets/b_queen.png'),   # Rainha preta
-        'bk': pygame.image.load('assets/b_king.png'),    # Rei preto
+        'wp': pygame.transform.scale(pygame.image.load('assets/w_pawn.png'), (square_size, square_size)),    # Peão branco
+        'wr': pygame.transform.scale(pygame.image.load('assets/w_rook.png'), (square_size, square_size)),    # Torre branca
+        'wn': pygame.transform.scale(pygame.image.load('assets/w_knight.png'), (square_size, square_size)),  # Cavalo branco
+        'wb': pygame.transform.scale(pygame.image.load('assets/w_bishop.png'), (square_size, square_size)),  # Bispo branco
+        'wq': pygame.transform.scale(pygame.image.load('assets/w_queen.png'), (square_size, square_size)),   # Rainha branca
+        'wk': pygame.transform.scale(pygame.image.load('assets/w_king.png'), (square_size, square_size)),    # Rei branco
+        'bp': pygame.transform.scale(pygame.image.load('assets/b_pawn.png'), (square_size, square_size)),    # Peão preto
+        'br': pygame.transform.scale(pygame.image.load('assets/b_rook.png'), (square_size, square_size)),    # Torre preta
+        'bn': pygame.transform.scale(pygame.image.load('assets/b_knight.png'), (square_size, square_size)),  # Cavalo preto
+        'bb': pygame.transform.scale(pygame.image.load('assets/b_bishop.png'), (square_size, square_size)),  # Bispo preto
+        'bq': pygame.transform.scale(pygame.image.load('assets/b_queen.png'), (square_size, square_size)),   # Rainha preta
+        'bk': pygame.transform.scale(pygame.image.load('assets/b_king.png'), (square_size, square_size)),    # Rei preto
     }
     return pieces
 
