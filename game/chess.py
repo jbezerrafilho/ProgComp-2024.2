@@ -52,9 +52,13 @@ def main():
                 if dragging:
                     row, col = get_square_under_mouse()
                     if selected_piece:
-                        # Move a peça para a nova posição
-                        board[row][col] = selected_piece
-                        board[selected_pos[0]][selected_pos[1]] = ''
+                        if (row, col) == selected_pos:
+                            # Se a peça foi solta na mesma posição, restaura a peça
+                            board[selected_pos[0]][selected_pos[1]] = selected_piece
+                        else:
+                            # Move a peça para a nova posição
+                            board[row][col] = selected_piece
+                            board[selected_pos[0]][selected_pos[1]] = ''
                         selected_piece = None
                         selected_pos = None
                         dragging = False
