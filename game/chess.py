@@ -26,6 +26,7 @@ board = initial_board()
 
 selected_piece = None
 selected_pos = None
+dragging = False
 
 def get_square_under_mouse():
     mouse_pos = pygame.mouse.get_pos()
@@ -35,7 +36,7 @@ def get_square_under_mouse():
     return row, col
 
 def main():
-    global selected_piece, selected_pos
+    global selected_piece, selected_pos, dragging
     running = True
     while running:
         for event in pygame.event.get():
@@ -43,20 +44,36 @@ def main():
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 row, col = get_square_under_mouse()
-                if selected_piece:
-                    # Move a peça para a nova posição
-                    board[row][col] = selected_piece
-                    board[selected_pos[0]][selected_pos[1]] = ''
-                    selected_piece = None
-                    selected_pos = None
-                else:
-                    # Seleciona a peça
+                if board[row][col] != '':
                     selected_piece = board[row][col]
                     selected_pos = (row, col)
+                    dragging = True
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if dragging:
+                    row, col = get_square_under_mouse()
+                    if selected_piece:
+                        # Move a peça para a nova posição
+                        board[row][col] = selected_piece
+                        board[selected_pos[0]][selected_pos[1]] = ''
+                        selected_piece = None
+                        selected_pos = None
+                        dragging = False
+            elif event.type == pygame.MOUSEMOTION:
+                if dragging:
+                    mouse_pos = pygame.mouse.get_pos()
+                    x, y = mouse_pos
 
         # Desenha o tabuleiro e as peças
         draw_board(screen, ROWS, COLS, SQUARE_SIZE, LIGHT_COLOR, DARK_COLOR)
         draw_pieces(screen, board, pieces, SQUARE_SIZE)
+        if dragging and selected_piece:
+            # Desenha a peça sendo arrastada
+            mouse_pos = pygame.mouse.get_pos()
+            x, y = mouse_pos
+            # Desenha a peça sendo arrastada na posição do mouse
+            screen.blit(pieces[selected_piece], (x - SQUARE_SIZE // 2, y - SQUARE_SIZE // 2))
+            # Remove a peça original do tabuleiro temporariamente
+            board[selected_pos[0]][selected_pos[1]] = ''
         pygame.display.flip()
 
     pygame.quit()
