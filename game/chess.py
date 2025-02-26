@@ -1,5 +1,6 @@
 import pygame
 from pieces import load_pieces, initial_board  # Importando do arquivo pieces.py
+from draw import draw_board, draw_pieces  # Importando do arquivo draw.py
 
 # Inicializa o Pygame
 pygame.init()
@@ -25,22 +26,6 @@ board = initial_board()
 
 selected_piece = None
 selected_pos = None
-
-def draw_board():
-    """Desenha o tabuleiro."""
-    for row in range(ROWS):
-        for col in range(COLS):
-            color = LIGHT_COLOR if (row + col) % 2 == 0 else DARK_COLOR
-            pygame.draw.rect(screen, color, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
-
-def draw_pieces():
-    """Desenha as peças no tabuleiro."""
-    for row in range(ROWS):
-        for col in range(COLS):
-            piece = board[row][col]  # Obtém a peça na posição (row, col)
-            if piece:  # Se houver uma peça na posição
-                # Desenha a imagem da peça no centro do quadrado
-                screen.blit(pieces[piece], (col * SQUARE_SIZE, row * SQUARE_SIZE))
 
 def get_square_under_mouse():
     mouse_pos = pygame.mouse.get_pos()
@@ -70,8 +55,8 @@ def main():
                     selected_pos = (row, col)
 
         # Desenha o tabuleiro e as peças
-        draw_board()
-        draw_pieces()
+        draw_board(screen, ROWS, COLS, SQUARE_SIZE, LIGHT_COLOR, DARK_COLOR)
+        draw_pieces(screen, board, pieces, SQUARE_SIZE)
         pygame.display.flip()
 
     pygame.quit()
