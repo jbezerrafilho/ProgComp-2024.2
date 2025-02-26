@@ -23,6 +23,9 @@ pygame.display.set_caption("Xadrez")
 pieces = load_pieces(SQUARE_SIZE)
 board = initial_board()
 
+selected_piece = None
+selected_pos = None
+
 def draw_board():
     """Desenha o tabuleiro."""
     for row in range(ROWS):
@@ -39,12 +42,32 @@ def draw_pieces():
                 # Desenha a imagem da peça no centro do quadrado
                 screen.blit(pieces[piece], (col * SQUARE_SIZE, row * SQUARE_SIZE))
 
+def get_square_under_mouse():
+    mouse_pos = pygame.mouse.get_pos()
+    x, y = mouse_pos
+    row = y // SQUARE_SIZE
+    col = x // SQUARE_SIZE
+    return row, col
+
 def main():
+    global selected_piece, selected_pos
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                row, col = get_square_under_mouse()
+                if selected_piece:
+                    # Move a peça para a nova posição
+                    board[row][col] = selected_piece
+                    board[selected_pos[0]][selected_pos[1]] = ''
+                    selected_piece = None
+                    selected_pos = None
+                else:
+                    # Seleciona a peça
+                    selected_piece = board[row][col]
+                    selected_pos = (row, col)
 
         # Desenha o tabuleiro e as peças
         draw_board()
