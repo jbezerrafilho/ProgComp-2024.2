@@ -1,6 +1,7 @@
 import pygame
 from pieces import load_pieces, initial_board  # Importando do arquivo pieces.py
 from draw import draw_board, draw_pieces  # Importando do arquivo draw.py
+from utils import get_square_under_mouse  # Importando do arquivo utils.py
 
 # Inicializa o Pygame
 pygame.init()
@@ -11,9 +12,8 @@ ROWS, COLS = 8, 8
 SQUARE_SIZE = WIDTH // COLS
 
 # Cores
-#WHITE = (232, 235, 239)   # um tom claro (por ex. quase branco)
+
 DARK_COLOR = (79, 42, 43)
-#DARK_COLOR  = (125, 135, 150)   # um tom escuro  (por ex. cinza azulado)
 LIGHT_COLOR = (121, 76, 64) # Marron
 
 # Tela
@@ -24,16 +24,11 @@ pygame.display.set_caption("Xadrez")
 pieces = load_pieces(SQUARE_SIZE)
 board = initial_board()
 
+# Gerencia o estado das interações do usuário com as peças
 selected_piece = None
 selected_pos = None
 dragging = False
 
-def get_square_under_mouse():
-    mouse_pos = pygame.mouse.get_pos()
-    x, y = mouse_pos
-    row = y // SQUARE_SIZE
-    col = x // SQUARE_SIZE
-    return row, col
 
 def main():
     global selected_piece, selected_pos, dragging
@@ -43,14 +38,15 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                row, col = get_square_under_mouse()
+
+                row, col = get_square_under_mouse(SQUARE_SIZE)
                 if board[row][col] != '':
                     selected_piece = board[row][col]
                     selected_pos = (row, col)
                     dragging = True
             elif event.type == pygame.MOUSEBUTTONUP:
                 if dragging:
-                    row, col = get_square_under_mouse()
+                    row, col = get_square_under_mouse(SQUARE_SIZE)
                     if selected_piece:
                         if (row, col) == selected_pos:
                             # Se a peça foi solta na mesma posição, restaura a peça
@@ -82,5 +78,5 @@ def main():
 
     pygame.quit()
 
-if __name__ == "__main__":
-    main()
+
+main()

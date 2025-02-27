@@ -23,11 +23,24 @@ def initial_board():
     board = [
         ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],  # Linha 0 (peças pretas)
         ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],  # Linha 1 (peões pretos)
-        ['', '', '', '', '', '', '', ''],                   # Linha 2
-        ['', '', '', '', '', '', '', ''],                   # Linha 3
-        ['', '', '', '', '', '', '', ''],                   # Linha 4
-        ['', '', '', '', '', '', '', ''],                   # Linha 5
+        ['', '', '', '', '', '', '', ''],                  # Linha 2
+        ['', '', '', '', '', '', '', ''],                  # Linha 3
+        ['', '', '', '', '', '', '', ''],                  # Linha 4
+        ['', '', '', '', '', '', '', ''],                  # Linha 5
         ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],  # Linha 6 (peões brancos)
         ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],  # Linha 7 (peças brancas)
     ]
     return board
+
+
+# Testes Preliminares
+# Inicializa o Pygame
+#pygame.init()
+
+# Carregar uma imagem
+#image = pygame.image.load('assets/w_pawn.png')
+# image = pygame.transform.scale(pygame.image.load('assets/w_pawn.png'), (100, 100))
+# print(type(image))
+
+
+
