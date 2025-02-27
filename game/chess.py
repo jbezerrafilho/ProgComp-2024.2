@@ -12,7 +12,6 @@ ROWS, COLS = 8, 8
 SQUARE_SIZE = WIDTH // COLS
 
 # Cores
-
 DARK_COLOR = (79, 42, 43)
 LIGHT_COLOR = (121, 76, 64) # Marron
 
@@ -29,7 +28,6 @@ selected_piece = None
 selected_pos = None
 dragging = False
 
-
 def main():
     global selected_piece, selected_pos, dragging
     running = True
@@ -38,7 +36,6 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-
                 row, col = get_square_under_mouse(SQUARE_SIZE)
                 if board[row][col] != '':
                     selected_piece = board[row][col]
@@ -77,6 +74,3 @@ def main():
         pygame.display.flip()
 
     pygame.quit()
-
-
-main()
