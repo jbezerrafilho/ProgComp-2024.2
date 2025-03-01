@@ -6,3 +6,7 @@ f = open('file.txt', 'r')
 
 txt = f.readlines()
 print(type(f))
+
+nome = "Amanda"
+ela = nome[::2]
+print(ela)
