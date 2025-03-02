@@ -1,2 +1,4 @@
 .DS_Store
 .idea/
+game/.vscode/
+game/__pycache__/
