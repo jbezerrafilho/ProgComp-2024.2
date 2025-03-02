@@ -1,5 +1,11 @@
 import pygame
-from utils import get_square_under_mouse
+
+def get_square_under_mouse(SQUARE_SIZE):
+    mouse_pos = pygame.mouse.get_pos()
+    x, y = mouse_pos
+    row = y // SQUARE_SIZE
+    col = x // SQUARE_SIZE
+    return row, col
 
 def handle_events(board, selected_piece, selected_pos, dragging, success_sound, error_sound, SQUARE_SIZE):
     for event in pygame.event.get():
