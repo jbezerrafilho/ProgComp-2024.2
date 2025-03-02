@@ -6,3 +6,4 @@ def get_square_under_mouse(SQUARE_SIZE):
     row = y // SQUARE_SIZE
     col = x // SQUARE_SIZE
     return row, col
+

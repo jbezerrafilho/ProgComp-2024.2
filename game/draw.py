@@ -15,3 +15,16 @@ def draw_pieces(screen, board, pieces, square_size):
             if piece:  # Se houver uma peça na posição
                 # Desenha a imagem da peça no centro do quadrado
                 screen.blit(pieces[piece], (col * square_size, row * square_size))
+
+def render(screen, board, pieces, SQUARE_SIZE, ROWS, COLS, LIGHT_COLOR, DARK_COLOR, selected_piece, selected_pos, dragging):
+    # Renderiza o tabuleiro e as peças
+    draw_board(screen, ROWS, COLS, SQUARE_SIZE, LIGHT_COLOR, DARK_COLOR)
+    draw_pieces(screen, board, pieces, SQUARE_SIZE)
+    if dragging and selected_piece:
+        mouse_pos = pygame.mouse.get_pos()
+        x, y = mouse_pos
+        # Desenha a peça sendo arrastada na posição do mouse
+        screen.blit(pieces[selected_piece], (x - SQUARE_SIZE // 2, y - SQUARE_SIZE // 2))
+        # Remove a peça original do tabuleiro temporariamente
+        board[selected_pos[0]][selected_pos[1]] = ''
+    pygame.display.flip()
