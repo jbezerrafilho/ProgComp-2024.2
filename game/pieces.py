@@ -33,14 +33,6 @@ def initial_board():
     return board
 
 
-# Testes Preliminares
-# Inicializa o Pygame
-#pygame.init()
-
-# Carregar uma imagem
-#image = pygame.image.load('assets/w_pawn.png')
-# image = pygame.transform.scale(pygame.image.load('assets/w_pawn.png'), (100, 100))
-# print(type(image))
 
 
 
