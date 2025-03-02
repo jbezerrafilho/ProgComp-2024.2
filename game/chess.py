@@ -1,7 +1,7 @@
 import pygame
 from setup import setup_game
 from events import handle_events
-from draw import render  # Importe a função render do arquivo draw.py
+from draw import render  
 
 def main():
     # Inicializa o jogo
@@ -17,5 +17,4 @@ def main():
 
     pygame.quit()
 
-if __name__ == "__main__":
-    main()
+main()
