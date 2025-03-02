@@ -21,6 +21,10 @@ pygame.display.set_caption("Xadrez")
 pieces = load_pieces(SQUARE_SIZE)
 board = initial_board()
 
+pygame.mixer.init()
+error_sound = pygame.mixer.Sound("assets/error.mp3")  
+success_sound = pygame.mixer.Sound("assets/success.mp3")  
+
 ##############################
 
 
@@ -51,13 +55,20 @@ def main():
                             # Se a peça foi solta na mesma posição, restaura a peça
                             board[selected_pos[0]][selected_pos[1]] = selected_piece  
                         else:
-                            # Move a peça para a nova posição                            
-                            board[row][col] = selected_piece                          
-                            board[selected_pos[0]][selected_pos[1]] = ''
+                            target_piece = board[row][col]  # Obtém a peça na casa de destino
+                            if target_piece == '' or selected_piece[0] != target_piece[0]:  
+                                # Move a peça para a nova posição se estiver vazia ou for de cor diferente
+                                success_sound.play() 
+                                board[row][col] = selected_piece                          
+                                board[selected_pos[0]][selected_pos[1]] = ''
+                            else:
+                                # Se a peça for da mesma cor, alerte o usuario e restaura a peça original
+                                error_sound.play()
+                                board[selected_pos[0]][selected_pos[1]] = selected_piece
                         selected_piece = None
                         selected_pos = None
                         dragging = False
-         
+
         # Rendereiza o tabuleiro e as peças
         draw_board(screen, ROWS, COLS, SQUARE_SIZE, LIGHT_COLOR, DARK_COLOR)
         draw_pieces(screen, board, pieces, SQUARE_SIZE)
