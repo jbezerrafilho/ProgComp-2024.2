@@ -12,8 +12,17 @@ def main():
     
     # Loop principal do Jogo
     while running:
-        running, selected_piece, selected_pos, dragging = handle_events(board, selected_piece, selected_pos, dragging, success_sound, error_sound, SQUARE_SIZE)
-        render(screen, board, pieces, SQUARE_SIZE, ROWS, COLS, LIGHT_COLOR, DARK_COLOR, selected_piece, selected_pos, dragging)
+        # Processa eventos do jogo
+        running, selected_piece, selected_pos, dragging = handle_events(
+            board, selected_piece, selected_pos, dragging, 
+            success_sound, error_sound, SQUARE_SIZE
+        )
+        
+        # Renderiza o tabuleiro e as peças
+        render(
+            screen, board, pieces, SQUARE_SIZE, ROWS, COLS, 
+            LIGHT_COLOR, DARK_COLOR, selected_piece, selected_pos, dragging
+        )
 
     pygame.quit()
 
