@@ -24,23 +24,23 @@ pieces = load_pieces(SQUARE_SIZE)
 board = initial_board()
 
 # Gerencia o estado das interações do usuário com as peças
-selected_piece = None
-selected_pos = None
-dragging = False
+selected_piece, selected_pos, dragging = None, None, False
 
 def main():
     global selected_piece, selected_pos, dragging
+
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                row, col = get_square_under_mouse(SQUARE_SIZE)
-                if board[row][col] != '':
-                    selected_piece = board[row][col]
-                    selected_pos = (row, col)
-                    dragging = True
+                row, col = get_square_under_mouse(SQUARE_SIZE)  #Obtém a posição do quadrado sob o cursor do mouse
+                if board[row][col] != '':  # Verifique se o quadrado contém peça
+                    selected_piece = board[row][col] # Armazene a peça'
+                    selected_pos = (row, col) # Armazene a posição da peça
+                    dragging = True # Peça sendo arrastada, isso permite que outras partes do código
+                    # desenhe a peça sob o cursor sendo arrastada
             elif event.type == pygame.MOUSEBUTTONUP:
                 if dragging:
                     row, col = get_square_under_mouse(SQUARE_SIZE)
@@ -55,11 +55,7 @@ def main():
                         selected_piece = None
                         selected_pos = None
                         dragging = False
-            elif event.type == pygame.MOUSEMOTION:
-                if dragging:
-                    mouse_pos = pygame.mouse.get_pos()
-                    x, y = mouse_pos
-
+         
         # Desenha o tabuleiro e as peças
         draw_board(screen, ROWS, COLS, SQUARE_SIZE, LIGHT_COLOR, DARK_COLOR)
         draw_pieces(screen, board, pieces, SQUARE_SIZE)
@@ -74,3 +70,5 @@ def main():
         pygame.display.flip()
 
     pygame.quit()
+
+main()
