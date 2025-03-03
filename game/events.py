@@ -28,7 +28,8 @@ def handle_events(board, selected_piece, selected_pos, dragging, success_sound, 
                         target_piece = board[row][col]  # Obtém a peça na casa de destino
                         if target_piece == '' or selected_piece[0] != target_piece[0]:  
                             # Move a peça para a nova posição se estiver vazia ou for de cor diferente
-                            success_sound.play() 
+                            if target_piece != '' and selected_piece[0] != target_piece[0]:
+                                success_sound.play()  # Toca o som de sucesso apenas se houver captura
                             board[row][col] = selected_piece                          
                             board[selected_pos[0]][selected_pos[1]] = ''
                         else:
