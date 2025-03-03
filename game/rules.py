@@ -139,3 +139,35 @@ def is_king_move_valid(board, selected_piece, selected_pos, target_pos):
     # Verifica se a casa de destino está vazia ou contém uma peça adversária
     target_piece = board[target_row][target_col]
     return target_piece == '' or target_piece[0] != piece_color
+
+def move_piece(board, selected_piece, selected_pos, target_pos, success_sound, error_sound):
+    """
+    Move a peça no tabuleiro se o movimento for válido.
+    """
+    piece_type = selected_piece[1]
+    is_valid_move = False
+
+    if piece_type == 'p':
+        is_valid_move = is_pawn_move_valid(board, selected_piece, selected_pos, target_pos)
+    elif piece_type == 'r':
+        is_valid_move = is_rook_move_valid(board, selected_piece, selected_pos, target_pos)
+    elif piece_type == 'n':
+        is_valid_move = is_knight_move_valid(board, selected_piece, selected_pos, target_pos)
+    elif piece_type == 'b':
+        is_valid_move = is_bishop_move_valid(board, selected_piece, selected_pos, target_pos)
+    elif piece_type == 'q':
+        is_valid_move = is_queen_move_valid(board, selected_piece, selected_pos, target_pos)
+    elif piece_type == 'k':
+        is_valid_move = is_king_move_valid(board, selected_piece, selected_pos, target_pos)
+
+    if is_valid_move:
+        target_piece = board[target_pos[0]][target_pos[1]]
+        if target_piece != '' and selected_piece[0] != target_piece[0]:
+            success_sound.play()
+        board[target_pos[0]][target_pos[1]] = selected_piece
+        board[selected_pos[0]][selected_pos[1]] = ''
+    else:
+        error_sound.play()
+        board[selected_pos[0]][selected_pos[1]] = selected_piece
+
+    return is_valid_move
