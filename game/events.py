@@ -1,6 +1,9 @@
 # events.py
 import pygame
-from rules import is_pawn_move_valid, is_rook_move_valid, is_knight_move_valid, is_bishop_move_valid  # Importa as funções de validação de movimento
+from rules import (
+    is_pawn_move_valid, is_rook_move_valid, is_knight_move_valid,
+    is_bishop_move_valid, is_queen_move_valid, is_king_move_valid  # Importa as funções de validação de movimento
+)
 
 def get_square_under_mouse(SQUARE_SIZE):
     """
@@ -65,6 +68,26 @@ def handle_events(board, selected_piece, selected_pos, dragging, success_sound, 
                                 board[selected_pos[0]][selected_pos[1]] = selected_piece
                         elif selected_piece[1] == 'b':  # Verifica se a peça é um bispo
                             if is_bishop_move_valid(board, selected_piece, selected_pos, (row, col)):
+                                target_piece = board[row][col]
+                                if target_piece != '' and selected_piece[0] != target_piece[0]:
+                                    success_sound.play()
+                                board[row][col] = selected_piece
+                                board[selected_pos[0]][selected_pos[1]] = ''
+                            else:
+                                error_sound.play()
+                                board[selected_pos[0]][selected_pos[1]] = selected_piece
+                        elif selected_piece[1] == 'q':  # Verifica se a peça é uma rainha
+                            if is_queen_move_valid(board, selected_piece, selected_pos, (row, col)):
+                                target_piece = board[row][col]
+                                if target_piece != '' and selected_piece[0] != target_piece[0]:
+                                    success_sound.play()
+                                board[row][col] = selected_piece
+                                board[selected_pos[0]][selected_pos[1]] = ''
+                            else:
+                                error_sound.play()
+                                board[selected_pos[0]][selected_pos[1]] = selected_piece
+                        elif selected_piece[1] == 'k':  # Verifica se a peça é um rei
+                            if is_king_move_valid(board, selected_piece, selected_pos, (row, col)):
                                 target_piece = board[row][col]
                                 if target_piece != '' and selected_piece[0] != target_piece[0]:
                                     success_sound.play()

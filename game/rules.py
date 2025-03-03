@@ -106,3 +106,36 @@ def is_bishop_move_valid(board, selected_piece, selected_pos, target_pos):
     # Verifica se a casa de destino está vazia ou contém uma peça adversária
     target_piece = board[target_row][target_col]
     return target_piece == '' or target_piece[0] != piece_color
+
+# rules.py
+
+def is_queen_move_valid(board, selected_piece, selected_pos, target_pos):
+    """
+    Verifica se o movimento da rainha é válido.
+    A rainha combina os movimentos da torre e do bispo.
+    """
+    # Verifica se o movimento é válido como torre ou bispo
+    return is_rook_move_valid(board, selected_piece, selected_pos, target_pos) or \
+           is_bishop_move_valid(board, selected_piece, selected_pos, target_pos)
+
+
+# rules.py
+
+def is_king_move_valid(board, selected_piece, selected_pos, target_pos):
+    """
+    Verifica se o movimento do rei é válido.
+    O rei move-se uma casa em qualquer direção (horizontal, vertical ou diagonal).
+    """
+    row, col = selected_pos
+    target_row, target_col = target_pos
+    piece_color = selected_piece[0]  # 'w' para branco, 'b' para preto
+
+    # Verifica se o movimento é de uma casa em qualquer direção
+    row_diff = abs(target_row - row)
+    col_diff = abs(target_col - col)
+    if row_diff > 1 or col_diff > 1:
+        return False
+
+    # Verifica se a casa de destino está vazia ou contém uma peça adversária
+    target_piece = board[target_row][target_col]
+    return target_piece == '' or target_piece[0] != piece_color
