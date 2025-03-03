@@ -74,3 +74,35 @@ def is_knight_move_valid(board, selected_piece, selected_pos, target_pos):
     # Verifica se a casa de destino está vazia ou contém uma peça adversária
     target_piece = board[target_row][target_col]
     return target_piece == '' or target_piece[0] != piece_color
+
+# rules.py
+
+def is_bishop_move_valid(board, selected_piece, selected_pos, target_pos):
+    """
+    Verifica se o movimento do bispo é válido.
+    O bispo move-se em diagonais, por qualquer número de casas desocupadas.
+    Ele não pode pular sobre outras peças.
+    """
+    row, col = selected_pos
+    target_row, target_col = target_pos
+    piece_color = selected_piece[0]  # 'w' para branco, 'b' para preto
+
+    # Verifica se o movimento é diagonal
+    row_diff = abs(target_row - row)
+    col_diff = abs(target_col - col)
+    if row_diff != col_diff:
+        return False
+
+    # Verifica se o caminho está livre
+    row_step = 1 if target_row > row else -1
+    col_step = 1 if target_col > col else -1
+    current_row, current_col = row + row_step, col + col_step
+    while current_row != target_row and current_col != target_col:
+        if board[current_row][current_col] != '':
+            return False
+        current_row += row_step
+        current_col += col_step
+
+    # Verifica se a casa de destino está vazia ou contém uma peça adversária
+    target_piece = board[target_row][target_col]
+    return target_piece == '' or target_piece[0] != piece_color
