@@ -1,24 +1,17 @@
 import pygame
-from rules import (
-    is_pawn_move_valid, is_rook_move_valid, is_knight_move_valid,
-    is_bishop_move_valid, is_queen_move_valid, is_king_move_valid,
-    move_piece  
-)
+from rules import move_piece  
 
+
+# Retorna a linha e a coluna do quadrado sob o mouse.
 def get_square_under_mouse(SQUARE_SIZE):
-    """
-    Obtém a posição do quadrado sob o cursor do mouse.
-    """
     mouse_pos = pygame.mouse.get_pos()
     x, y = mouse_pos
     row = y // SQUARE_SIZE
     col = x // SQUARE_SIZE
     return row, col
 
+# Processa os eventos do jogo, como cliques do mouse e movimentos das peças.
 def handle_events(board, selected_piece, selected_pos, dragging, success_sound, error_sound, SQUARE_SIZE):
-    """
-    Processa os eventos do jogo, como cliques do mouse e movimentos das peças.
-    """
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             return False, selected_piece, selected_pos, dragging
