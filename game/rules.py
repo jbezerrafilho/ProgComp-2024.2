@@ -1,21 +1,27 @@
-
-def is_pawn_move_valid(board, selected_piece, selected_pos, target_pos):
+def get_move_details(selected_piece, selected_pos, target_pos):
     """
-    Verifica se o movimento do peão é válido.
+    Extrai detalhes do movimento, como a posição inicial, posição de destino,
+    e cor da peça
     """
     row, col = selected_pos
     target_row, target_col = target_pos
     piece_color = selected_piece[0]  # 'w' para branco, 'b' para preto
+    return row, col, target_row, target_col, piece_color
+
+
+# Verfica se o movimento do peão é válido
+def is_pawn_move_valid(board, selected_piece, selected_pos, target_pos):
+    
+    row, col, target_row, target_col, piece_color = get_move_details(selected_piece, selected_pos, target_pos)
     direction = -1 if piece_color == 'w' else 1  # Direção do movimento: brancos movem para cima, pretos para baixo
 
     # Verifica se o movimento é para frente
     if col == target_col:
-        # Movimento para frente
+        # Verifica se o movimento é de uma casa
         if target_row == row + direction:
-            # Movimento de uma casa
             return board[target_row][target_col] == ''
+        # Verifica se o movimento é de duas casas
         elif target_row == row + 2 * direction and (row == 6 or row == 1):
-            # Movimento de duas casas no primeiro movimento
             return board[row + direction][col] == '' and board[target_row][target_col] == ''
     # Verifica se é uma captura diagonal
     elif abs(target_col - col) == 1 and target_row == row + direction:
@@ -24,27 +30,24 @@ def is_pawn_move_valid(board, selected_piece, selected_pos, target_pos):
 
     return False
 
+# Verfica se o movimento da torre é válido
 def is_rook_move_valid(board, selected_piece, selected_pos, target_pos):
-    """
-    Verifica se o movimento da torre é válido.
-    """
-    row, col = selected_pos
-    target_row, target_col = target_pos
-    piece_color = selected_piece[0]  # 'w' para branco, 'b' para preto
+    
+    row, col, target_row, target_col, piece_color = get_move_details(selected_piece, selected_pos, target_pos)
 
-    # Verifica se o movimento é em linha reta (horizontal ou vertical)
+    # Verifica se o movimento é em linha reta (horizontal ou vertical, nunca as duas simultaneamente)
     if row != target_row and col != target_col:
         return False
 
-    # Verifica se o caminho está livre
+    # Verifica o movimento horizontal 
     if row == target_row:
-        # Movimento horizontal
+        # Direita ou Esquerda
         step = 1 if target_col > col else -1
         for c in range(col + step, target_col, step):
             if board[row][c] != '':
                 return False
+    # Verifica o movimento vertical
     else:
-        # Movimento vertical
         step = 1 if target_row > row else -1
         for r in range(row + step, target_row, step):
             if board[r][col] != '':
@@ -54,17 +57,10 @@ def is_rook_move_valid(board, selected_piece, selected_pos, target_pos):
     target_piece = board[target_row][target_col]
     return target_piece == '' or target_piece[0] != piece_color
 
-
+# Verifica se o movimento do cavalo é válido.
 def is_knight_move_valid(board, selected_piece, selected_pos, target_pos):
-    """
-    Verifica se o movimento do cavalo é válido.
-    O cavalo move-se em "L": duas casas em uma direção e uma casa na direção perpendicular.
-    Ele pode pular sobre outras peças.
-    """
-    row, col = selected_pos
-    target_row, target_col = target_pos
-    piece_color = selected_piece[0]  # 'w' para branco, 'b' para preto
-
+   
+    row, col, target_row, target_col, piece_color = get_move_details(selected_piece, selected_pos, target_pos)
     # Verifica se o movimento é em "L"
     row_diff = abs(target_row - row)
     col_diff = abs(target_col - col)
@@ -83,9 +79,7 @@ def is_bishop_move_valid(board, selected_piece, selected_pos, target_pos):
     O bispo move-se em diagonais, por qualquer número de casas desocupadas.
     Ele não pode pular sobre outras peças.
     """
-    row, col = selected_pos
-    target_row, target_col = target_pos
-    piece_color = selected_piece[0]  # 'w' para branco, 'b' para preto
+    row, col, target_row, target_col, piece_color = get_move_details(selected_piece, selected_pos, target_pos)
 
     # Verifica se o movimento é diagonal
     row_diff = abs(target_row - row)
@@ -126,9 +120,7 @@ def is_king_move_valid(board, selected_piece, selected_pos, target_pos):
     Verifica se o movimento do rei é válido.
     O rei move-se uma casa em qualquer direção (horizontal, vertical ou diagonal).
     """
-    row, col = selected_pos
-    target_row, target_col = target_pos
-    piece_color = selected_piece[0]  # 'w' para branco, 'b' para preto
+    row, col, target_row, target_col, piece_color = get_move_details(selected_piece, selected_pos, target_pos)
 
     # Verifica se o movimento é de uma casa em qualquer direção
     row_diff = abs(target_row - row)

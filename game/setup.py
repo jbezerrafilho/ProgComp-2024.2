@@ -8,8 +8,8 @@ def setup_game():
     ROWS, COLS = 8, 8
     SQUARE_SIZE = WIDTH // COLS
 
-    DARK_COLOR = (79, 42, 43)
-    LIGHT_COLOR = (121, 76, 64)  # Marron
+    DARK_COLOR = (100, 75, 58)
+    LIGHT_COLOR = (154, 147, 131)  
 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Xadrez")
