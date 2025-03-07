@@ -71,14 +71,7 @@ def is_knight_move_valid(board, selected_piece, selected_pos, target_pos):
     target_piece = board[target_row][target_col]
     return target_piece == '' or target_piece[0] != piece_color
 
-# rules.py
-
 def is_bishop_move_valid(board, selected_piece, selected_pos, target_pos):
-    """
-    Verifica se o movimento do bispo é válido.
-    O bispo move-se em diagonais, por qualquer número de casas desocupadas.
-    Ele não pode pular sobre outras peças.
-    """
     row, col, target_row, target_col, piece_color = get_move_details(selected_piece, selected_pos, target_pos)
 
     # Verifica se o movimento é diagonal
@@ -101,25 +94,13 @@ def is_bishop_move_valid(board, selected_piece, selected_pos, target_pos):
     target_piece = board[target_row][target_col]
     return target_piece == '' or target_piece[0] != piece_color
 
-# rules.py
 
 def is_queen_move_valid(board, selected_piece, selected_pos, target_pos):
-    """
-    Verifica se o movimento da rainha é válido.
-    A rainha combina os movimentos da torre e do bispo.
-    """
-    # Verifica se o movimento é válido como torre ou bispo
     return is_rook_move_valid(board, selected_piece, selected_pos, target_pos) or \
            is_bishop_move_valid(board, selected_piece, selected_pos, target_pos)
 
 
-# rules.py
-
 def is_king_move_valid(board, selected_piece, selected_pos, target_pos):
-    """
-    Verifica se o movimento do rei é válido.
-    O rei move-se uma casa em qualquer direção (horizontal, vertical ou diagonal).
-    """
     row, col, target_row, target_col, piece_color = get_move_details(selected_piece, selected_pos, target_pos)
 
     # Verifica se o movimento é de uma casa em qualquer direção
