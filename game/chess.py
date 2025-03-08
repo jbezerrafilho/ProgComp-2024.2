@@ -28,7 +28,7 @@ def main():
             LIGHT_COLOR, DARK_COLOR, selected_piece, selected_pos, dragging
         )
 
+        
     pygame.quit()
 
-if __name__ == "__main__":
-    main()
+main()
