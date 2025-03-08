@@ -5,10 +5,14 @@ from draw import render
 
 def main():
     # Inicializa o jogo
-    screen, pieces, board, SQUARE_SIZE, ROWS, COLS, LIGHT_COLOR, DARK_COLOR, error_sound, success_sound = setup_game()
+    (screen, pieces, board, SQUARE_SIZE, ROWS, COLS, LIGHT_COLOR, DARK_COLOR, 
+     error_sound, success_sound) = setup_game()
 
     # Variáveis de controle de estado
-    selected_piece, selected_pos, dragging, running = None, None, False, True
+    selected_piece = None
+    selected_pos = None
+    dragging = False
+    running = True
     
     # Loop principal do Jogo
     while running:
@@ -26,4 +30,5 @@ def main():
 
     pygame.quit()
 
-main()
+if __name__ == "__main__":
+    main()

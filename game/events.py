@@ -25,11 +25,12 @@ def handle_events(board, selected_piece, selected_pos, dragging, success_sound, 
             if dragging:
                 row, col = get_square_under_mouse(SQUARE_SIZE)
                 if selected_piece:
-                    if (row, col) == selected_pos:
+                    target_pos = (row, col)
+                    if target_pos == selected_pos:
                         # Se a peça foi solta na mesma posição, restaura a peça
                         board[selected_pos[0]][selected_pos[1]] = selected_piece
                     else:
-                        move_piece(board, selected_piece, selected_pos, (row, col), success_sound, error_sound)
+                        move_piece(board, selected_piece, selected_pos, target_pos, success_sound, error_sound)
                     selected_piece = None
                     selected_pos = None
                     dragging = False
