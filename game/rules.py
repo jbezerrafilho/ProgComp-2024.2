@@ -8,6 +8,12 @@ def get_move_details(selected_piece, selected_pos, target_pos):
     piece_color = selected_piece[0]  # 'w' para branco, 'b' para preto
     return row, col, target_row, target_col, piece_color
 
+def is_target_square_valid(board, target_row, target_col, piece_color):
+    """
+    Verifica se a casa de destino está vazia ou contém uma peça adversária.
+    """
+    target_piece = board[target_row][target_col]  # Obtém a peça na posição de destino
+    return target_piece == '' or target_piece[0] != piece_color  # Retorna True se a casa estiver vazia ou se a peça na casa for de cor diferente
 
 # Verfica se o movimento do peão é válido
 def is_pawn_move_valid(board, selected_piece, selected_pos, target_pos):
@@ -25,10 +31,10 @@ def is_pawn_move_valid(board, selected_piece, selected_pos, target_pos):
             return board[row + direction][col] == '' and board[target_row][target_col] == ''
     # Verifica se é uma captura diagonal
     elif abs(target_col - col) == 1 and target_row == row + direction:
-        target_piece = board[target_row][target_col]
-        return target_piece != '' and target_piece[0] != piece_color
+        return is_target_square_valid(board, target_row, target_col, piece_color)
 
     return False
+
 
 # Verfica se o movimento da torre é válido
 def is_rook_move_valid(board, selected_piece, selected_pos, target_pos):
@@ -53,9 +59,8 @@ def is_rook_move_valid(board, selected_piece, selected_pos, target_pos):
             if board[r][col] != '':
                 return False
 
-    # Verifica se a casa de destino está vazia ou contém uma peça adversária
-    target_piece = board[target_row][target_col]
-    return target_piece == '' or target_piece[0] != piece_color
+    return is_target_square_valid(board, target_row, target_col, piece_color)
+
 
 # Verifica se o movimento do cavalo é válido.
 def is_knight_move_valid(board, selected_piece, selected_pos, target_pos):
@@ -67,9 +72,8 @@ def is_knight_move_valid(board, selected_piece, selected_pos, target_pos):
     if not ((row_diff == 2 and col_diff == 1) or (row_diff == 1 and col_diff == 2)):
         return False
 
-    # Verifica se a casa de destino está vazia ou contém uma peça adversária
-    target_piece = board[target_row][target_col]
-    return target_piece == '' or target_piece[0] != piece_color
+    return is_target_square_valid(board, target_row, target_col, piece_color)
+
 
 def is_bishop_move_valid(board, selected_piece, selected_pos, target_pos):
     row, col, target_row, target_col, piece_color = get_move_details(selected_piece, selected_pos, target_pos)
@@ -90,9 +94,7 @@ def is_bishop_move_valid(board, selected_piece, selected_pos, target_pos):
         current_row += row_step
         current_col += col_step
 
-    # Verifica se a casa de destino está vazia ou contém uma peça adversária
-    target_piece = board[target_row][target_col]
-    return target_piece == '' or target_piece[0] != piece_color
+    return is_target_square_valid(board, target_row, target_col, piece_color)
 
 
 def is_queen_move_valid(board, selected_piece, selected_pos, target_pos):
@@ -109,9 +111,8 @@ def is_king_move_valid(board, selected_piece, selected_pos, target_pos):
     if row_diff > 1 or col_diff > 1:
         return False
 
-    # Verifica se a casa de destino está vazia ou contém uma peça adversária
-    target_piece = board[target_row][target_col]
-    return target_piece == '' or target_piece[0] != piece_color
+    return is_target_square_valid(board, target_row, target_col, piece_color)
+
 
 def move_piece(board, selected_piece, selected_pos, target_pos, success_sound, error_sound):
     """

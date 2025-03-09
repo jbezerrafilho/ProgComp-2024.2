@@ -1,6 +1,5 @@
 import pygame
-from rules import move_piece  
-
+from rules import move_piece
 
 # Retorna a linha e a coluna do quadrado sob o mouse.
 def get_square_under_mouse(SQUARE_SIZE):
