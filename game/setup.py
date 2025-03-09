@@ -5,8 +5,8 @@ from pieces import load_pieces, initial_board
 WIDTH, HEIGHT = 800, 800
 ROWS, COLS = 8, 8
 SQUARE_SIZE = WIDTH // COLS
-DARK_COLOR = (100, 75, 58)
-LIGHT_COLOR = (154, 147, 131)
+DARK_COLOR = (0, 0, 0)
+LIGHT_COLOR = (246, 201, 137)
 ERROR_SOUND_PATH = "assets/error.mp3"
 SUCCESS_SOUND_PATH = "assets/success.mp3"
 
