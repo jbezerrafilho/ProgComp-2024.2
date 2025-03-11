@@ -10,26 +10,33 @@ LIGHT_COLOR = (246, 201, 137)
 ERROR_SOUND_PATH = "assets/error.mp3"
 SUCCESS_SOUND_PATH = "assets/success.mp3"
 
-def setup_screen():
-    """Configura a tela do jogo."""
+# Inicializa e configura o jogo
+def setup_game():
+    pygame.init()
+    pygame.mixer.init()
+
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Xadrez")
-    return screen
 
-def setup_sounds():
-    """Configura os sons do jogo."""
-    pygame.mixer.init()
-    error_sound = pygame.mixer.Sound(ERROR_SOUND_PATH)
-    success_sound = pygame.mixer.Sound(SUCCESS_SOUND_PATH)
-    return error_sound, success_sound
-
-def setup_game():
-    """Inicializa e configura o jogo."""
-    pygame.init()
-
-    screen = setup_screen()
     pieces = load_pieces(SQUARE_SIZE)
     board = initial_board()
-    error_sound, success_sound = setup_sounds()
+    error_sound = pygame.mixer.Sound(ERROR_SOUND_PATH)
+    success_sound = pygame.mixer.Sound(SUCCESS_SOUND_PATH)
 
-    return screen, pieces, board, SQUARE_SIZE, ROWS, COLS, LIGHT_COLOR, DARK_COLOR, error_sound, success_sound
+    return {
+        'screen': screen,
+        'pieces': pieces,
+        'board': board,
+        'SQUARE_SIZE': SQUARE_SIZE,
+        'ROWS': ROWS,
+        'COLS': COLS,
+        'LIGHT_COLOR': LIGHT_COLOR,
+        'DARK_COLOR': DARK_COLOR,
+        'error_sound': error_sound,
+        'success_sound': success_sound,
+        'selected_piece': None,
+        'selected_pos': None,
+        'dragging': False,
+        'running': True,
+        'current_player': 'w'
+    }

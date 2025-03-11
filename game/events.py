@@ -1,7 +1,6 @@
 import pygame
 from rules import move_piece
 
-# Retorna a linha e a coluna do quadrado sob o mouse.
 def get_square_under_mouse(SQUARE_SIZE):
     mouse_pos = pygame.mouse.get_pos()
     x, y = mouse_pos
@@ -9,31 +8,41 @@ def get_square_under_mouse(SQUARE_SIZE):
     col = x // SQUARE_SIZE
     return row, col
 
-# Processa os eventos do jogo, como cliques do mouse e movimentos das peças.
-def handle_events(board, selected_piece, selected_pos, dragging, success_sound, error_sound, SQUARE_SIZE, current_player):
+def handle_events(game_state):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            return False, selected_piece, selected_pos, dragging, current_player
+            game_state['running'] = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            row, col = get_square_under_mouse(SQUARE_SIZE)
-            piece = board[row][col]
-            if piece != '' and piece[0] == current_player:  # Verifica se a peça pertence ao jogador atual
-                selected_piece = piece
-                selected_pos = (row, col)
-                dragging = True
+            row, col = get_square_under_mouse(game_state['SQUARE_SIZE'])
+            piece = game_state['board'][row][col]
+            if piece != '' and piece[0] == game_state['current_player']:
+                game_state['selected_piece'] = piece
+                game_state['selected_pos'] = (row, col)
+                game_state['dragging'] = True
         elif event.type == pygame.MOUSEBUTTONUP:
-            if dragging:
-                row, col = get_square_under_mouse(SQUARE_SIZE)
-                if selected_piece:
-                    target_pos = (row, col)
-                    if target_pos == selected_pos:
-                        # Se a peça foi solta na mesma posição, restaura a peça
-                        board[selected_pos[0]][selected_pos[1]] = selected_piece
+            if game_state['dragging']:
+                row, col = get_square_under_mouse(game_state['SQUARE_SIZE'])
+                if game_state['selected_piece']:
+                    target_pos = row, col
+                    if target_pos == game_state['selected_pos']:
+                        # Reposiciona a peça na posição original
+                        row = game_state['selected_pos'][0]
+                        col = game_state['selected_pos'][1]
+                        game_state['board'][row][col] = game_state['selected_piece']
                     else:
-                        if move_piece(board, selected_piece, selected_pos, target_pos, success_sound, error_sound):
-                            # Alterna o jogador após um movimento válido
-                            current_player = 'b' if current_player == 'w' else 'w'
-                    selected_piece = None
-                    selected_pos = None
-                    dragging = False
-    return True, selected_piece, selected_pos, dragging, current_player
+                        # Tenta mover a peça para a nova posição
+                        if move_piece(
+                            game_state['board'], 
+                            game_state['selected_piece'], 
+                            game_state['selected_pos'], 
+                            target_pos, 
+                            game_state['success_sound'], 
+                            game_state['error_sound']
+                        ):
+                            # Alterna o jogador atual
+                            game_state['current_player'] = 'b' if game_state['current_player'] == 'w' else 'w'
+                    # Reseta o estado de seleção e arrasto
+                    game_state['selected_piece'] = None
+                    game_state['selected_pos'] = None
+                    game_state['dragging'] = False
+    return game_state
