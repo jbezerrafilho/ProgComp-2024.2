@@ -53,7 +53,7 @@ def render(game_state):
     if game_state['dragging'] and game_state['selected_piece']:
         mouse_pos = pygame.mouse.get_pos()
         x, y = mouse_pos
-        print(x, y)
+        #print(x, y)
         # Calcula a posição da peça arrastada para centralizá-la no cursor do mouse
         piece_x = x - game_state['SQUARE_SIZE'] // 2
         piece_y = y - game_state['SQUARE_SIZE'] // 2

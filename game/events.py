@@ -13,6 +13,7 @@ def handle_quit_event(game_state):
 
 def handle_mouse_button_down(game_state):
     row, col = get_square_under_mouse(game_state['SQUARE_SIZE'])
+    #print(row, col)
     piece = game_state['board'][row][col]
     if piece != '' and piece[0] == game_state['current_player']:
         game_state['selected_piece'] = piece
@@ -22,6 +23,7 @@ def handle_mouse_button_down(game_state):
 def handle_mouse_button_up(game_state):
     if game_state['dragging']:
         row, col = get_square_under_mouse(game_state['SQUARE_SIZE'])
+        
         if game_state['selected_piece']:
             target_pos = row, col
             if target_pos == game_state['selected_pos']:
