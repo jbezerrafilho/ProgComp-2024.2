@@ -24,9 +24,9 @@ palavras = (
 
 sorteada = random.choice(palavras)
 tentativas = 6
-RED = '\033[31;m'
-GREEN = '\033[1;32;m'
-YELLOW = '\033[1;33;m'
+RED = '\033[31m'
+GREEN = '\033[1;32m'
+YELLOW = '\033[1;33m'
 DEFAULT = '\033[m'
 
 print(f"""
